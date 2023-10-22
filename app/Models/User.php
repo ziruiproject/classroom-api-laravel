@@ -10,6 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -71,5 +74,10 @@ class User extends Authenticatable
             get: fn ($value) => strtolower($value),
             set: fn ($value) => strtolower($value),
         );
+    }
+
+    public function studentClasses(): HasMany
+    {
+        return $this->hasMany(StudentClass::class);
     }
 }
